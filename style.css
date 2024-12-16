@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Dekko&family=Nabla&display=swap');
+
+:root {
+    --white-color: hsl(0, 0%, 100%);
+    --black-color: hsl(0, 0%, 0%);
+
+    --body-font: "Dekko", cursive;
+    --h1-font-size: 1.5rem;
+    --normal-font-size: 0.938rem;
+
+    --font-regular: 400;
+    --font-medium: 500;
+
+    --z-tooltip: 10;
+    --z-fixed: 100;
+}
+@media screen and (min-width: 968px) {
+    :root {
+        --normal-font-size: 1rem;
+    }
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    background-color: var(--black-color);
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+.container {
+    max-width: 1140px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+.section__container {
+    --white-color: #ffffff;
+    --dark-color: #222222;
+    --dark-color-alt: #444444;
+    --color-1: #ff1d50;
+    --color-2: #2196f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+.zigzag__container {
+    --skin-color: #00ff00;
+    --dark-black-color: #292929;
+    --border-color: #928b8b;
+
+    position: absolute;
+    display: flex;
+    gap: 38px;
+}
+.zigzag__container:nth-child(2) {
+    transform: rotate(180deg);
+    z-index: -1;
+}
+.zigzag__item {
+    display: block;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    overflow: hidden;
+    transform: rotate(315deg);
+}
+.zigzag__item::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--skin-color));
+    transform: translateX(-100%);
+    animation: animateBefore 4s linear infinite;
+    animation-delay: calc(1s * var(--i));
+}
+@keyframes animateBefore {
+    0% {
+        transform: translateX(-100%);
+    }
+    25%,
+    100% {
+        transform: translateX(100%);
+    }
+}
+.zigzag__item::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--skin-color));
+    transform: translateY(-100%);
+    animation: animateAfter 4s linear infinite;
+    animation-delay: calc(1s * var(--i));
+}
+@keyframes animateAfter {
+    0%, 12.5% {
+        transform: translateY(-100%);
+    }
+
+    37.5%, 100% {
+        transform: translateY(100%);
+    }
+}
+.zigzag__item span {
+    position: absolute;
+    cursor: pointer;
+    inset: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-black-color);
+    outline: 1px solid var(--border-color);
+    transition: 0.3s linear;
+}
+.zigzag__container:nth-child(1) .zigzag__item span:hover {
+    outline-offset: -5px;
+}
+.zigzag__item span b {
+    font-weight: normal;
+    font-size: 2em;
+    transform: rotate(45deg);
+    color: var(--white-color);
+}
+@media screen and (max-width: 600px) {
+    .zigzag__container {
+        gap: 19px;
+    }
+    .zigzag__item {
+        height: 50px;
+        width: 50px;
+    }
+    .zigzag__item span b {
+        font-size: 1em;
+    }
+}
